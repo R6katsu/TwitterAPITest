@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter API 投稿フォーム</title>
+</head>
+<body>
+    <h1>Twitter API ツイート投稿</h1>
+    
+    <form id="tweetForm">
+        <label for="message">ツイート内容:</label>
+        <textarea id="message" name="message" required></textarea><br>
+        <button type="submit">ツイートする</button>
+    </form>
+
+    <script>
+        document.getElementById("tweetForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const message = document.getElementById("message").value;
+
+            // POSTリクエストを送信
+            const response = await fetch('http://127.0.0.1:3000/tweet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert("ツイート成功: " + result.message);
+            } else {
+                alert("エラー: " + result.error);
+            }
+        });
+    </script>
+</body>
+</html>
