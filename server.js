@@ -9,8 +9,9 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// 🔴 【修正】静的ファイルを提供する設定をAPIの前に記述
-//app.use(express.static('public'));
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
 
 // X API v2 の認証情報
 const client = new TwitterApi({
