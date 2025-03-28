@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // 🔴 【修正】静的ファイルを提供する設定をAPIの前に記述
-app.use(express.static('public'));
+//app.use(express.static('public'));
 
 // X API v2 の認証情報
 const client = new TwitterApi({
